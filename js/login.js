@@ -1,5 +1,5 @@
 // Seleciona o botão de login pelo ID e adiciona um evento de clique para chamar a função autenticar
-const botaoLogin = document.querySelector('#id_do_botao_Entrar_do_formulario');
+const botaoLogin = document.querySelector('#submit');
 botaoLogin.addEventListener('click', autenticar);
 
 // Seleciona a área onde as mensagens de status serão exibidas
@@ -9,18 +9,19 @@ const areaMensagem = document.getElementById('msg');
 async function autenticar(e) {
 	// Impede que o formulário recarregue a página ao enviar os dados
   e.preventDefault(); 
+  console.log('li');
 
   // Exibe uma mensagem temporária informando que a requisição está em andamento
   document.getElementById('msg').innerText = "Aguarde... ";
 
   // Coleta os valores digitados nos campos de email e senha
   const dados = {
-    email: document.getElementById('id_do_input_do_email').value,
-    senha: document.getElementById('id_do_input_do_senha').value
+    email: document.getElementById('email').value,
+    senha: document.getElementById('senha').value
   };
 
   // Define a URL da API que processará a autenticação
-  const url = "URL_DO_SEU_BACK_END_NA_VERCEL/login";
+  const url = "https://api13-huoe.vercel.app/login";
 
   try {
     // Envia uma requisição HTTP POST para a API com os dados do usuário
