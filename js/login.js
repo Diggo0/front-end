@@ -44,13 +44,21 @@ async function autenticar(e) {
     // Armazena o token JWT no localStorage para manter a sessão do usuário
     localStorage.setItem('jwt', data.token);
 
-    // Exibe uma mensagem de sucesso na interface do usuário em verde juntamente com o Token gerado
-    areaMensagem.style = "color:green";
-    areaMensagem.innerHTML = "Usuário Autenticado com Sucesso! <br> Token: " + data.token;
+    
+    window.location.href = 'login.html';
 
   } catch (error) {
     // Exibe uma mensagem de erro na interface do usuário em vermelho
     areaMensagem.style = "color:red";
     areaMensagem.innerHTML = error;
   }
+
+  router.get("/auth", verificarAutenticacao, async (req, res) => {
+    console.log("Rota GET /auth solicitada");
+    try {
+      res.status(200).json({ user: `${req.userId}` });
+    } catch (error) {
+      res.status(error.status || 500).json({ message: error.message || "Erro!" });
+    }
+  });
 }
